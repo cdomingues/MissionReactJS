@@ -19,7 +19,7 @@ type RoomParams = {
     id: string;
 }
 
-export function Room(){
+export function AdminRoom(){
 
 const {user} = useAuth();
 
@@ -58,7 +58,8 @@ async function handleSendQuestion(event: FormEvent) {
             <header>
             <div className="content">
                 <img src={logoImg} alt="Let me ask" />
-                <RoomCode code={roomId} />
+                <div><RoomCode code={roomId} />
+                <Button isOutlined>Encerrar Sala</Button></div>
 
             </div>
             </header>
@@ -68,23 +69,7 @@ async function handleSendQuestion(event: FormEvent) {
                <h1>Sala{title}</h1>
                 {questions.length > 0 && <span>{questions.length} perguntas</span>}
                </div>
-               <form onSubmit={handleSendQuestion}>
-                   <textarea 
-                   placeholder="O que você quer perguntar?" 
-                   onChange={event=>setNewQuestion(event.target.value)}
-                   value={newQuestion}
-                   />
-                   <div className="form-footer">
-                       {user ? (
-                           <div className="user-info">
-                               <img src={user.avatar} alt={user.name} />
-                               <span>{user.name}</span>
-                           </div>
-                       ) : ( <span>Para enviar uma pergunta, <button>faça seu login</button></span>) }
-                      
-                       <Button type="submit" disabled={!user}>Enviar perguntas</Button>
-                   </div>
-               </form>
+               
 
                <div className="question-list">
                {questions.map(question=>{
